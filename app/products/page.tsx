@@ -21,6 +21,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { ImageUpload } from '@/components/products/ImageUpload'
 import {
   Dialog,
   DialogContent,
@@ -54,6 +55,7 @@ export default function ProductsPage() {
     name: '',
     price: 0,
     quantity: 0,
+    image_url: null,
   })
   const [formError, setFormError] = useState('')
 
@@ -68,7 +70,7 @@ export default function ProductsPage() {
   }
 
   const resetForm = () => {
-    setFormData({ name: '', price: 0, quantity: 0 })
+    setFormData({ name: '', price: 0, quantity: 0, image_url: null })
     setFormError('')
   }
 
@@ -120,6 +122,7 @@ export default function ProductsPage() {
       name: product.name,
       price: product.price,
       quantity: product.quantity,
+      image_url: product.image_url,
     })
     setIsEditOpen(true)
   }
@@ -237,6 +240,11 @@ export default function ProductsPage() {
                       required
                     />
                   </div>
+                  <ImageUpload
+                    value={formData.image_url}
+                    onChange={(url) => setFormData({ ...formData, image_url: url })}
+                    disabled={createMutation.isPending}
+                  />
                 </div>
                 <DialogFooter>
                   <Button
@@ -309,6 +317,11 @@ export default function ProductsPage() {
                     required
                   />
                 </div>
+                <ImageUpload
+                  value={formData.image_url}
+                  onChange={(url) => setFormData({ ...formData, image_url: url })}
+                  disabled={updateMutation.isPending}
+                />
               </div>
               <DialogFooter>
                 <Button

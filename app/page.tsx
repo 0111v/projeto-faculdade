@@ -1,10 +1,12 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { useAuthStore } from '@/lib/stores/auth.store'
 import { useFetchProducts } from '@/lib/queries/products.queries'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { PackageOpen } from 'lucide-react'
 
 export default function Home() {
   const router = useRouter()
@@ -76,7 +78,24 @@ export default function Home() {
             {products.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {products.map((product) => (
-                  <Card key={product.id} className="flex flex-col">
+                  <Card key={product.id} className="flex flex-col overflow-hidden pt-0">
+                    {/* Product Image */}
+                    <div className="relative w-full h-96 bg-muted">
+                      {product.image_url ? (
+                        <Image
+                          src={product.image_url}
+                          alt={product.name}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <PackageOpen className="w-16 h-16 text-muted-foreground" />
+                        </div>
+                      )}
+                    </div>
+
                     <CardHeader>
                       <CardTitle className="line-clamp-2">{product.name}</CardTitle>
                       <CardDescription>
