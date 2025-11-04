@@ -37,7 +37,7 @@ export default function LoginPage() {
       if (err.name === 'ZodError') {
         setError(err.errors[0].message)
       } else {
-        setError(err.message || 'Invalid email or password')
+        setError(err.message || 'Email ou senha inválidos')
       }
     } finally {
       setIsLoading(false)
@@ -48,8 +48,8 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Login</CardTitle>
-          <CardDescription>Entre com seu email e senha.</CardDescription>
+          <CardTitle>Entrar</CardTitle>
+          <CardDescription>Digite suas credenciais para acessar sua conta</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
@@ -63,7 +63,7 @@ export default function LoginPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="email@exemplo.com"
+                placeholder="seu@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
@@ -71,7 +71,7 @@ export default function LoginPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Senha</Label>
               <Input
                 id="password"
                 type="password"
@@ -85,12 +85,12 @@ export default function LoginPage() {
           </CardContent>
           <CardFooter className="flex flex-col space-y-4 mt-6">
             <Button type="submit" className="w-full cursor-pointer" disabled={isLoading}>
-              {isLoading ? 'Logging in...' : 'Login'}
+              {isLoading ? 'Entrando...' : 'Entrar'}
             </Button>
             <p className="text-sm text-center text-muted-foreground">
               Não tem uma conta?{' '}
               <Link href="/signup" className="text-primary hover:underline">
-                Criar conta
+                Cadastre-se
               </Link>
             </p>
           </CardFooter>

@@ -2,16 +2,16 @@ import { z } from 'zod'
 
 export const authValidation = {
   login: z.object({
-    email: z.email('Invalid email address'),
-    password: z.string().min(6, 'Password must be at least 6 characters'),
+    email: z.string().email('Endereço de email inválido'),
+    password: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres'),
   }),
 
   signup: z.object({
-    email: z.email('Invalid email address'),
-    password: z.string().min(6, 'Password must be at least 6 characters'),
-    confirmPassword: z.string().min(6, 'Password must be at least 6 characters'),
+    email: z.string().email('Endereço de email inválido'),
+    password: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres'),
+    confirmPassword: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres'),
   }).refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
+    message: "As senhas não coincidem",
     path: ['confirmPassword'],
   }),
 }

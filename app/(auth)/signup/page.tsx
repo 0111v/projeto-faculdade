@@ -42,7 +42,7 @@ export default function SignupPage() {
       if (err.name === 'ZodError') {
         setError(err.errors[0].message)
       } else {
-        setError(err.message || 'Failed to create account')
+        setError(err.message || 'Falha ao criar conta')
       }
     } finally {
       setIsLoading(false)
@@ -68,7 +68,7 @@ export default function SignupPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="email@exemplo.com"
+                placeholder="seu@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
@@ -107,7 +107,7 @@ export default function SignupPage() {
             <p className="text-sm text-center text-muted-foreground">
               Já tem uma conta?{' '}
               <Link href="/login" className="text-primary hover:underline">
-                Login
+                Entrar
               </Link>
             </p>
           </CardFooter>
