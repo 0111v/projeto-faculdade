@@ -220,10 +220,13 @@ export default function ProductsPage() {
                       type="number"
                       step="0.01"
                       min="0"
-                      value={formData.price}
-                      onChange={(e) =>
-                        setFormData({ ...formData, price: parseFloat(e.target.value) || 0 })
-                      }
+                      lang="pt-BR"
+                      placeholder="0.00"
+                      value={formData.price || ''}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(',', '.')
+                        setFormData({ ...formData, price: parseFloat(value) || 0 })
+                      }}
                       required
                     />
                   </div>
@@ -297,10 +300,13 @@ export default function ProductsPage() {
                     type="number"
                     step="0.01"
                     min="0"
-                    value={formData.price}
-                    onChange={(e) =>
-                      setFormData({ ...formData, price: parseFloat(e.target.value) || 0 })
-                    }
+                    lang="pt-BR"
+                    placeholder="0.00"
+                    value={formData.price || ''}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(',', '.')
+                      setFormData({ ...formData, price: parseFloat(value) || 0 })
+                    }}
                     required
                   />
                 </div>
