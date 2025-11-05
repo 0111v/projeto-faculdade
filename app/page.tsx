@@ -4,14 +4,25 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { useAuthStore } from '@/lib/stores/auth.store'
 import { useFetchProducts } from '@/lib/queries/products.queries'
+import { useAddCartItem } from '@/lib/queries/cart.queries'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { PackageOpen } from 'lucide-react'
+import { PackageOpen, ShoppingCart } from 'lucide-react'
+import { CartButton } from '@/components/cart/CartButton'
 
 export default function Home() {
   const router = useRouter()
   const { user } = useAuthStore()
   const { data: products, isLoading, error } = useFetchProducts()
+  const addToCartMutation = useAddCartItem()
+
+  const handleAddToCart = (productId: string) => {
+    if (!user) {
+      router.push('/login')
+      return
+    }
+    addToCartMutation.mutate({ product_id: productId, quantity: 1 })
+  }
 
   return (
     <div className="min-h-screen">
@@ -23,6 +34,7 @@ export default function Home() {
             <p className="text-sm text-muted-foreground">Um logo aqui</p>
           </div>
           <div className="flex items-center gap-4">
+            <CartButton />
             {user ? (
               <>
                 <Button onClick={() => router.push('/dashboard')} variant="outline">
@@ -114,8 +126,10 @@ export default function Home() {
                     <CardFooter>
                       <Button
                         className="w-full"
-                        disabled={product.quantity === 0}
+                        disabled={product.quantity === 0 || addToCartMutation.isPending}
+                        onClick={() => handleAddToCart(product.id)}
                       >
+                        <ShoppingCart className="w-4 h-4 mr-2" />
                         {product.quantity === 0 ? 'Fora de Estoque' : 'Adicionar ao Carrinho'}
                       </Button>
                     </CardFooter>
