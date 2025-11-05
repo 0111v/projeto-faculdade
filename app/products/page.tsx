@@ -236,10 +236,11 @@ export default function ProductsPage() {
                       id="quantity"
                       type="number"
                       min="0"
-                      value={formData.quantity}
-                      onChange={(e) =>
-                        setFormData({ ...formData, quantity: parseInt(e.target.value) || 0 })
-                      }
+                      value={formData.quantity === 0 ? '' : formData.quantity}
+                      onChange={(e) => {
+                        const value = e.target.value === '' ? 0 : parseInt(e.target.value)
+                        setFormData({ ...formData, quantity: value })
+                      }}
                       required
                     />
                   </div>
@@ -316,10 +317,11 @@ export default function ProductsPage() {
                     id="edit-quantity"
                     type="number"
                     min="0"
-                    value={formData.quantity}
-                    onChange={(e) =>
-                      setFormData({ ...formData, quantity: parseInt(e.target.value) || 0 })
-                    }
+                    value={formData.quantity === 0 ? '' : formData.quantity}
+                    onChange={(e) => {
+                      const value = e.target.value === '' ? 0 : parseInt(e.target.value)
+                      setFormData({ ...formData, quantity: value })
+                    }}
                     required
                   />
                 </div>
