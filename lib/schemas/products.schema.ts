@@ -8,6 +8,7 @@ export const productsValidation = {
     price: z.number().nonnegative('Preço deve ser positivo'),
     quantity: z.number().int().nonnegative('Quantidade deve ser um número inteiro positivo'),
     image_url: z.string().url('URL da imagem inválida').nullable().optional(),
+    description: z.string().nullable().optional(),
   }),
 
   productInsert: z.object({
@@ -15,6 +16,7 @@ export const productsValidation = {
     price: z.coerce.number().nonnegative('Preço deve ser positivo'),
     quantity: z.coerce.number().int().nonnegative('Quantidade deve ser um número inteiro positivo'),
     image_url: z.string().url('URL da imagem inválida').nullable().optional(),
+    description: z.string().nullable().optional(),
   }),
 
   productUpdate: z.object({
@@ -22,6 +24,7 @@ export const productsValidation = {
     price: z.coerce.number().nonnegative('Preço deve ser positivo').optional(),
     quantity: z.coerce.number().int().nonnegative('Quantidade deve ser um número inteiro positivo').optional(),
     image_url: z.string().url('URL da imagem inválida').nullable().optional(),
+    description: z.string().nullable().optional(),
   }).refine((data) => Object.keys(data).length > 0, {
     message: 'Pelo menos um campo deve ser fornecido para atualização',
   }),

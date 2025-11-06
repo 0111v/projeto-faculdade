@@ -62,7 +62,10 @@ export default function Home() {
                 {products.map((product) => (
                   <Card key={product.id} className="flex flex-col overflow-hidden pt-0">
                     {/* Product Image */}
-                    <div className="relative w-full h-96 bg-muted">
+                    <div
+                      className="relative w-full h-96 bg-muted cursor-pointer hover:opacity-90 transition-opacity"
+                      onClick={() => router.push(`/product/${product.id}`)}
+                    >
                       {product.image_url ? (
                         <Image
                           src={product.image_url}
@@ -78,7 +81,10 @@ export default function Home() {
                       )}
                     </div>
 
-                    <CardHeader>
+                    <CardHeader
+                      className="cursor-pointer hover:text-primary transition-colors"
+                      onClick={() => router.push(`/product/${product.id}`)}
+                    >
                       <CardTitle className="line-clamp-2">{product.name}</CardTitle>
                       <CardDescription>
                         {product.quantity > 0 ? (

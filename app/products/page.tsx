@@ -14,6 +14,7 @@ import type { Product, ProductInsert } from '@/types/products.types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 import {
   Card,
   CardContent,
@@ -57,6 +58,7 @@ export default function ProductsPage() {
     price: 0,
     quantity: 0,
     image_url: null,
+    description: null,
   })
   const [formError, setFormError] = useState('')
 
@@ -71,7 +73,7 @@ export default function ProductsPage() {
   }
 
   const resetForm = () => {
-    setFormData({ name: '', price: 0, quantity: 0, image_url: null })
+    setFormData({ name: '', price: 0, quantity: 0, image_url: null, description: null })
     setFormError('')
   }
 
@@ -124,6 +126,7 @@ export default function ProductsPage() {
       price: product.price,
       quantity: product.quantity,
       image_url: product.image_url,
+      description: product.description,
     })
     setIsEditOpen(true)
   }
@@ -234,6 +237,18 @@ export default function ProductsPage() {
                       required
                     />
                   </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="description">Descrição</Label>
+                    <Textarea
+                      id="description"
+                      placeholder="Descrição do produto..."
+                      value={formData.description || ''}
+                      onChange={(e) =>
+                        setFormData({ ...formData, description: e.target.value || null })
+                      }
+                      rows={4}
+                    />
+                  </div>
                   <ImageUpload
                     value={formData.image_url}
                     onChange={(url) => setFormData({ ...formData, image_url: url })}
@@ -313,6 +328,18 @@ export default function ProductsPage() {
                       setFormData({ ...formData, quantity: value })
                     }}
                     required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="edit-description">Descrição</Label>
+                  <Textarea
+                    id="edit-description"
+                    placeholder="Descrição do produto..."
+                    value={formData.description || ''}
+                    onChange={(e) =>
+                      setFormData({ ...formData, description: e.target.value || null })
+                    }
+                    rows={4}
                   />
                 </div>
                 <ImageUpload
