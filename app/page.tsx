@@ -8,7 +8,7 @@ import { useAddCartItem } from '@/lib/queries/cart.queries'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { PackageOpen, ShoppingCart } from 'lucide-react'
-import { CartButton } from '@/components/cart/CartButton'
+import { Navbar } from '@/components/layout/Navbar'
 
 export default function Home() {
   const router = useRouter()
@@ -26,37 +26,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold">Loja de Flores</h1>
-            <p className="text-sm text-muted-foreground">Um logo aqui</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <CartButton />
-            {user ? (
-              <>
-                <Button onClick={() => router.push('/dashboard')} variant="outline">
-                  Painel
-                </Button>
-                <Button onClick={() => router.push('/products')} variant="outline">
-                  Gerenciar Produtos
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button onClick={() => router.push('/login')} variant="outline">
-                  Entrar
-                </Button>
-                <Button onClick={() => router.push('/signup')}>
-                  Cadastrar
-                </Button>
-              </>
-            )}
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">

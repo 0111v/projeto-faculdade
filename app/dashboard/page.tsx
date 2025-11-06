@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/lib/stores/auth.store'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Navbar } from '@/components/layout/Navbar'
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -28,19 +29,11 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen p-8">
-      <div className="max-w-4xl mx-auto space-y-8">
-        <div className="flex items-center justify-between">
+    <div className="min-h-screen">
+      <Navbar />
+      <div className="p-8">
+        <div className="max-w-4xl mx-auto space-y-8">
           <h1 className="text-3xl font-bold">Painel</h1>
-          <div className="flex items-center gap-4">
-            <Button onClick={() => router.push('/')} variant="outline">
-              Início
-            </Button>
-            <Button onClick={handleLogout} variant="outline">
-              Sair
-            </Button>
-          </div>
-        </div>
 
         <Card>
           <CardHeader>
@@ -70,6 +63,7 @@ export default function DashboardPage() {
             </Button>
           </CardContent>
         </Card>
+        </div>
       </div>
     </div>
   )

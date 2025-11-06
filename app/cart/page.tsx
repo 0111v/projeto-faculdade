@@ -12,6 +12,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { Navbar } from '@/components/layout/Navbar'
 
 export default function CartPage() {
   const router = useRouter()
@@ -47,13 +48,10 @@ export default function CartPage() {
 
   if (!items || items.length === 0) {
     return (
-      <div className="min-h-screen p-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-8">
-            <Button variant="outline" onClick={() => router.push('/')}>
-              ← Voltar para a loja
-            </Button>
-          </div>
+      <div className="min-h-screen">
+        <Navbar />
+        <div className="p-8">
+          <div className="max-w-4xl mx-auto">
 
           <Card className="text-center py-12">
             <CardContent className="flex flex-col items-center gap-4">
@@ -68,25 +66,25 @@ export default function CartPage() {
             </CardContent>
           </Card>
         </div>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen p-8">
-      <div className="max-w-6xl mx-auto space-y-8">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">Carrinho de Compras</h1>
-            <p className="text-muted-foreground">
-              {items.length} {items.length === 1 ? 'produto' : 'produtos'} no carrinho
-            </p>
+    <div className="min-h-screen">
+      <Navbar />
+      <div className="p-8">
+        <div className="max-w-6xl mx-auto space-y-8">
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold">Carrinho de Compras</h1>
+              <p className="text-muted-foreground">
+                {items.length} {items.length === 1 ? 'produto' : 'produtos'} no carrinho
+              </p>
+            </div>
           </div>
-          <Button variant="outline" onClick={() => router.push('/')}>
-            ← Continuar comprando
-          </Button>
-        </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Cart Items */}
@@ -213,6 +211,7 @@ export default function CartPage() {
             </Card>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

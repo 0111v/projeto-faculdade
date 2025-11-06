@@ -22,6 +22,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { ImageUpload } from '@/components/products/ImageUpload'
+import { Navbar } from '@/components/layout/Navbar'
 import {
   Dialog,
   DialogContent,
@@ -161,26 +162,15 @@ export default function ProductsPage() {
   }
 
   return (
-    <div className="min-h-screen p-8">
-      <div className="max-w-6xl mx-auto space-y-8">
-        {/* Header */}
-        <div className="flex items-center justify-between">
+    <div className="min-h-screen">
+      <Navbar />
+      <div className="p-8">
+        <div className="max-w-6xl mx-auto space-y-8">
+          {/* Header */}
           <div>
             <h1 className="text-3xl font-bold">Produtos</h1>
             <p className="text-muted-foreground">Gerencie o inventário da sua loja</p>
           </div>
-          <div className="flex items-center gap-4">
-            <Button onClick={() => router.push('/')} variant="outline">
-              Início
-            </Button>
-            <Button onClick={() => router.push('/dashboard')} variant="outline">
-              Painel
-            </Button>
-            <Button onClick={handleLogout} variant="outline">
-              Sair
-            </Button>
-          </div>
-        </div>
 
         {/* Create Product Button */}
         <div className="flex justify-end">
@@ -407,6 +397,7 @@ export default function ProductsPage() {
             )}
           </CardContent>
         </Card>
+        </div>
       </div>
     </div>
   )
