@@ -3,8 +3,10 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useQueryClient } from '@tanstack/react-query'
 import { useAuthStore } from '@/lib/stores/auth.store'
 import { authValidation } from '@/lib/schemas/auth.schema'
+import { cartKeys } from '@/lib/queries/cart.queries'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -12,6 +14,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 
 export default function LoginPage() {
   const router = useRouter()
+  const queryClient = useQueryClient()
   const login = useAuthStore((state) => state.login)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -29,6 +32,9 @@ export default function LoginPage() {
 
       // Attempt login
       await login(credentials)
+
+      // Invalidate cart queries to refetch user's cart
+      queryClient.invalidateQueries({ queryKey: cartKeys.items() })
 
       // Redirect on success
       router.push('/')

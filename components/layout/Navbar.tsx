@@ -2,7 +2,9 @@
 
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { useQueryClient } from '@tanstack/react-query'
 import { useAuthStore } from '@/lib/stores/auth.store'
+import { cartKeys } from '@/lib/queries/cart.queries'
 import { Button } from '@/components/ui/button'
 import { CartButton } from '@/components/cart/CartButton'
 
@@ -12,11 +14,14 @@ interface NavbarProps {
 
 export function Navbar({ showAuth = true }: NavbarProps) {
   const router = useRouter()
+  const queryClient = useQueryClient()
   const { user, logout } = useAuthStore()
 
   const handleLogout = async () => {
     try {
       await logout()
+      // Clear cart queries on logout
+      queryClient.removeQueries({ queryKey: cartKeys.all })
       router.push('/')
       router.refresh()
     } catch (error) {
