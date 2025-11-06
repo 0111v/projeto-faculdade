@@ -196,7 +196,11 @@ export default function CartPage() {
                 </div>
               </CardContent>
               <CardFooter className="flex flex-col gap-2">
-                <Button className="w-full" size="lg">
+                <Button
+                  className="w-full"
+                  size="lg"
+                  onClick={() => router.push('/checkout')}
+                >
                   Finalizar Compra
                 </Button>
                 <Button
