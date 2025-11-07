@@ -94,7 +94,7 @@ export default function CartPage() {
                 <CardContent className="p-6">
                   <div className="flex gap-4">
                     {/* Product Image */}
-                    <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-muted">
+                    <div className="relative w-24 h-24 shrink-0 rounded-lg overflow-hidden bg-muted">
                       {item.product.image_url ? (
                         <Image
                           src={item.product.image_url}
@@ -110,7 +110,7 @@ export default function CartPage() {
                     </div>
 
                     {/* Product Info */}
-                    <div className="flex-grow space-y-2">
+                    <div className="grow space-y-2">
                       <h3 className="font-semibold text-lg">{item.product.name}</h3>
                       <p className="text-muted-foreground text-sm">
                         Estoque: {item.product.quantity}

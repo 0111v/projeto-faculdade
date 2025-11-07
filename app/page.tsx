@@ -94,7 +94,7 @@ export default function Home() {
                         )}
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="flex-grow">
+                    <CardContent className="grow">
                       <p className="text-3xl font-bold">
                         R$ {product.price.toFixed(2)}
                       </p>
