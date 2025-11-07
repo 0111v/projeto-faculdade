@@ -45,6 +45,19 @@ class OrdersService {
 
     return data
   }
+
+  // Fetch all orders (admin only)
+  async fetchAllOrders(): Promise<OrderWithItems[]> {
+    const response = await fetch('/api/admin/orders')
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Falha ao carregar pedidos')
+    }
+
+    return data
+  }
 }
 
 export const ordersService = new OrdersService()

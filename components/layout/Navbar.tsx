@@ -108,7 +108,7 @@ export function Navbar({ showAuth = true }: NavbarProps) {
                 <>
                   <Button
                     onClick={() => router.push('/login')}
-                    variant="ghost"
+                    variant="outline"
                     size="sm"
                   >
                     Entrar

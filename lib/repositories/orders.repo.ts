@@ -194,6 +194,25 @@ class OrdersRepository {
 
     return (orders || []) as OrderWithItems[]
   }
+
+  // Fetch all orders (admin only)
+  async fetchAllOrders(): Promise<OrderWithItems[]> {
+    const supabase = await createClient()
+
+    const { data: orders, error: ordersError } = await supabase
+      .from('orders')
+      .select(`
+        *,
+        items:order_items (*)
+      `)
+      .order('created_at', { ascending: false })
+
+    if (ordersError) {
+      throw new Error('Falha ao carregar pedidos')
+    }
+
+    return (orders || []) as OrderWithItems[]
+  }
 }
 
 export const ordersRepository = new OrdersRepository()
