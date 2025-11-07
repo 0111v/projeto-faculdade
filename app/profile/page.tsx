@@ -37,6 +37,19 @@ export default function ProfilePage() {
                 <p className="font-medium">{user?.email}</p>
               </div>
               <div>
+                <p className="text-sm text-muted-foreground">Tipo de Conta</p>
+                <div className="flex items-center gap-2">
+                  <span className="font-medium capitalize">
+                    {user?.profile?.role === 'admin' ? 'Administrador' : 'Cliente'}
+                  </span>
+                  {user?.profile?.role === 'admin' && (
+                    <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-semibold">
+                      ADMIN
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div>
                 <p className="text-sm text-muted-foreground">ID do Usuário</p>
                 <p className="font-mono text-xs">{user?.id}</p>
               </div>

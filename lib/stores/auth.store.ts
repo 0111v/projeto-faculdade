@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { authService } from '@/lib/services/auth.service'
 import type { AuthStore, LoginCredentials, SignupCredentials } from '@/types/auth.types'
 
-export const useAuthStore = create<AuthStore>((set) => ({
+export const useAuthStore = create<AuthStore>((set, get) => ({
   user: null,
   isLoading: true,
 
@@ -52,5 +52,10 @@ export const useAuthStore = create<AuthStore>((set) => ({
     } catch (error) {
       set({ user: null, isLoading: false })
     }
+  },
+
+  isAdmin: () => {
+    const { user } = get()
+    return user?.profile?.role === 'admin'
   },
 }))

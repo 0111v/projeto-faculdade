@@ -15,7 +15,7 @@ interface NavbarProps {
 export function Navbar({ showAuth = true }: NavbarProps) {
   const router = useRouter()
   const queryClient = useQueryClient()
-  const { user, logout } = useAuthStore()
+  const { user, logout, isAdmin } = useAuthStore()
 
   const handleLogout = async () => {
     try {
@@ -76,20 +76,24 @@ export function Navbar({ showAuth = true }: NavbarProps) {
                   >
                     Perfil
                   </Button>
-                  <Button
-                    onClick={() => router.push('/dashboard')}
-                    variant="outline"
-                    size="sm"
-                  >
-                    Painel
-                  </Button>
-                  <Button
-                    onClick={() => router.push('/products')}
-                    variant="outline"
-                    size="sm"
-                  >
-                    Gerenciar Produtos
-                  </Button>
+                  {isAdmin() && (
+                    <>
+                      <Button
+                        onClick={() => router.push('/dashboard')}
+                        variant="outline"
+                        size="sm"
+                      >
+                        Painel
+                      </Button>
+                      <Button
+                        onClick={() => router.push('/products')}
+                        variant="outline"
+                        size="sm"
+                      >
+                        Gerenciar Produtos
+                      </Button>
+                    </>
+                  )}
                   <Button
                     onClick={handleLogout}
                     variant="outline"

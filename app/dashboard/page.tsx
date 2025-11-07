@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/lib/stores/auth.store'
 import { Button } from '@/components/ui/button'
@@ -8,7 +9,14 @@ import { Navbar } from '@/components/layout/Navbar'
 
 export default function DashboardPage() {
   const router = useRouter()
-  const { user, logout, isLoading } = useAuthStore()
+  const { user, logout, isLoading, isAdmin } = useAuthStore()
+
+  // Redirect non-admin users
+  useEffect(() => {
+    if (user && !isAdmin()) {
+      router.push('/')
+    }
+  }, [user, isAdmin, router])
 
   const handleLogout = async () => {
     try {
@@ -24,6 +32,15 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-muted-foreground">Carregando...</p>
+      </div>
+    )
+  }
+
+  // Show loading while checking admin status
+  if (!isAdmin()) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-muted-foreground">Verificando permissões...</p>
       </div>
     )
   }

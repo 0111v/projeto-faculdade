@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/lib/stores/auth.store'
 import {
@@ -44,8 +44,24 @@ import {
 
 export default function ProductsPage() {
   const router = useRouter()
-  const { user, logout } = useAuthStore()
+  const { user, logout, isAdmin } = useAuthStore()
   const { data: products, isLoading, error } = useFetchProducts()
+
+  // Redirect non-admin users
+  useEffect(() => {
+    if (user && !isAdmin()) {
+      router.push('/')
+    }
+  }, [user, isAdmin, router])
+
+  // Show loading while checking admin status
+  if (!isAdmin()) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-muted-foreground">Verificando permissões...</p>
+      </div>
+    )
+  }
   const createMutation = useCreateProduct()
   const updateMutation = useUpdateProduct()
   const deleteMutation = useDeleteProduct()
