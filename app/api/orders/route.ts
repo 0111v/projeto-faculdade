@@ -2,6 +2,20 @@ import { NextResponse } from 'next/server'
 import { ordersRepository } from '@/lib/repositories/orders.repo'
 import { ordersValidation } from '@/lib/schemas/orders.schema'
 
+// GET /api/orders - Fetch all orders for current user
+export async function GET() {
+  try {
+    const orders = await ordersRepository.fetchUserOrders()
+    return NextResponse.json(orders)
+  } catch (error: any) {
+    console.error('Fetch orders error:', error)
+    return NextResponse.json(
+      { error: error.message || 'Falha ao carregar pedidos' },
+      { status: 400 }
+    )
+  }
+}
+
 // POST /api/orders - Create order from cart with customer info
 export async function POST(request: Request) {
   try {

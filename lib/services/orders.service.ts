@@ -32,6 +32,19 @@ class OrdersService {
 
     return data
   }
+
+  // Fetch all orders for current user
+  async fetchUserOrders(): Promise<OrderWithItems[]> {
+    const response = await fetch('/api/orders')
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Falha ao carregar pedidos')
+    }
+
+    return data
+  }
 }
 
 export const ordersService = new OrdersService()

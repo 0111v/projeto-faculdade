@@ -70,6 +70,13 @@ export function Navbar({ showAuth = true }: NavbarProps) {
               {user ? (
                 <>
                   <Button
+                    onClick={() => router.push('/profile')}
+                    variant="outline"
+                    size="sm"
+                  >
+                    Perfil
+                  </Button>
+                  <Button
                     onClick={() => router.push('/dashboard')}
                     variant="outline"
                     size="sm"
