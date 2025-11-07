@@ -46,6 +46,21 @@ export default function ProductsPage() {
   const router = useRouter()
   const { user, logout, isAdmin } = useAuthStore()
   const { data: products, isLoading, error } = useFetchProducts()
+  const createMutation = useCreateProduct()
+  const updateMutation = useUpdateProduct()
+  const deleteMutation = useDeleteProduct()
+
+  const [isCreateOpen, setIsCreateOpen] = useState(false)
+  const [isEditOpen, setIsEditOpen] = useState(false)
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null)
+  const [formData, setFormData] = useState<ProductInsert>({
+    name: '',
+    price: 0,
+    quantity: 0,
+    image_url: null,
+    description: null,
+  })
+  const [formError, setFormError] = useState('')
 
   // Redirect non-admin users
   useEffect(() => {
@@ -62,21 +77,6 @@ export default function ProductsPage() {
       </div>
     )
   }
-  const createMutation = useCreateProduct()
-  const updateMutation = useUpdateProduct()
-  const deleteMutation = useDeleteProduct()
-
-  const [isCreateOpen, setIsCreateOpen] = useState(false)
-  const [isEditOpen, setIsEditOpen] = useState(false)
-  const [editingProduct, setEditingProduct] = useState<Product | null>(null)
-  const [formData, setFormData] = useState<ProductInsert>({
-    name: '',
-    price: 0,
-    quantity: 0,
-    image_url: null,
-    description: null,
-  })
-  const [formError, setFormError] = useState('')
 
   const handleLogout = async () => {
     try {
