@@ -103,8 +103,8 @@ export default function ProductsPage() {
       setIsCreateOpen(false)
       resetForm()
     } catch (err: any) {
-      if (err.name === 'ZodError') {
-        setFormError(err.errors[0].message)
+      if (err.name === 'ZodError' && err.issues?.[0]?.message) {
+        setFormError(err.issues[0].message)
       } else {
         setFormError(err.message || 'Failed to create product')
       }
@@ -127,8 +127,8 @@ export default function ProductsPage() {
       setEditingProduct(null)
       resetForm()
     } catch (err: any) {
-      if (err.name === 'ZodError') {
-        setFormError(err.errors[0].message)
+      if (err.name === 'ZodError' && err.issues?.[0]?.message) {
+        setFormError(err.issues[0].message)
       } else {
         setFormError(err.message || 'Failed to update product')
       }

@@ -39,8 +39,8 @@ export default function SignupPage() {
       router.push('/')
       router.refresh()
     } catch (err: any) {
-      if (err.name === 'ZodError') {
-        setError(err.errors[0].message)
+      if (err.name === 'ZodError' && err.issues?.[0]?.message) {
+        setError(err.issues[0].message)
       } else {
         setError(err.message || 'Falha ao criar conta')
       }

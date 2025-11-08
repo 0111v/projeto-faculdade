@@ -48,8 +48,8 @@ export default function CheckoutPage() {
       // Redirect to order confirmation
       router.push(`/order/${order.id}`)
     } catch (err: any) {
-      if (err.name === 'ZodError') {
-        setFormError(err.errors[0].message)
+      if (err.name === 'ZodError' && err.issues?.[0]?.message) {
+        setFormError(err.issues[0].message)
       } else {
         setFormError(err.message || 'Falha ao criar pedido')
       }
