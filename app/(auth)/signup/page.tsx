@@ -26,11 +26,7 @@ export default function SignupPage() {
 
     try {
       // Validate input
-      const credentials = authValidation.signup.parse({
-        email,
-        password,
-        confirmPassword,
-      })
+      const credentials = authValidation.signup.parse({ email, password, confirmPassword })
 
       // Attempt signup
       await signup(credentials)
